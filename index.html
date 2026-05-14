@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Tierra de Mascotas · Cómo funciona la plataforma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d2238;
+    --ink-soft: #3b4f66;
+    --ink-mute: #6b7c91;
+    --paper: #fbfaf7;
+    --paper-2: #f3f0e9;
+    --line: #e6e0d3;
+    --line-soft: #efeae0;
+
+    --teal: #0e8b8b;
+    --teal-deep: #075b5b;
+    --teal-soft: #cfeae9;
+    --sand: #d8c69a;
+    --rose: #c97a6c;
+    --leaf: #6f8e57;
+    --gold: #b48a3e;
+
+    --shadow-sm: 0 1px 2px rgba(13,34,56,.05), 0 1px 1px rgba(13,34,56,.03);
+    --shadow-md: 0 10px 30px -12px rgba(13,34,56,.18), 0 4px 12px -6px rgba(13,34,56,.08);
+    --shadow-lg: 0 30px 60px -25px rgba(13,34,56,.25);
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  p { margin: 0 0 0.85em 0; color: var(--ink-soft); }
+  strong { color: var(--ink); font-weight: 600; }
+  small { color: var(--ink-mute); font-size: 13px; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,250,247,.85);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px; max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); }
+  .brand-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--teal) 0%, var(--teal-deep) 80%);
+    display: grid; place-items: center; color: #fff; font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 16px;
+  }
+  .brand small { display: block; font-weight: 400; color: var(--ink-mute); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .nav { display: flex; gap: 22px; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500;
+    padding: 6px 0; border-bottom: 1.5px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .nav a:hover { color: var(--teal-deep); border-color: var(--teal); }
+  @media (max-width: 720px) { .nav { display: none; } }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 80px 0 60px 0;
+    background:
+      radial-gradient(ellipse 800px 500px at 80% -10%, rgba(14,139,139,.10), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 10% 110%, rgba(216,198,154,.18), transparent 60%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: #fff; border: 1px solid var(--line);
+    color: var(--teal-deep); font-size: 13px; font-weight: 500; letter-spacing: .02em;
+    box-shadow: var(--shadow-sm);
+  }
+  .hero-eyebrow::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+  }
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    margin-top: 22px;
+    max-width: 18ch;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal-deep); font-weight: 400; }
+  .hero-lede {
+    font-size: clamp(17px, 1.6vw, 20px);
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-top: 22px;
+  }
+  .hero-meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    margin-top: 48px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta div { min-width: 0; }
+  .hero-meta b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
+  .hero-meta span { color: var(--ink-mute); font-size: 13px; }
+
+  /* ---------- SECTION ---------- */
+  section { padding: 80px 0; border-bottom: 1px solid var(--line-soft); }
+  .section-head { max-width: 720px; margin-bottom: 48px; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em;
+    color: var(--teal-deep); display: inline-block; margin-bottom: 14px;
+  }
+  .section-eyebrow::before {
+    content: "—"; margin-right: 10px; color: var(--teal); font-weight: 400;
+  }
+  .section-head h2 {
+    font-size: clamp(30px, 4vw, 46px);
+    margin-bottom: 16px;
+  }
+  .section-head p { font-size: 17px; color: var(--ink-soft); max-width: 60ch; }
+
+  /* ---------- SERVICIOS ---------- */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .service {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    position: relative; overflow: hidden;
+  }
+  .service:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--teal-soft); }
+  .service-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 22px;
+    background: var(--paper-2); color: var(--teal-deep);
+    margin-bottom: 18px; font-family: 'Fraunces', serif; font-weight: 600;
+  }
+  .service h3 { font-size: 22px; margin-bottom: 8px; }
+  .service p { font-size: 14.5px; margin: 0; }
+  .service[data-tone="leaf"] .service-icon { background: #e8f0dd; color: var(--leaf); }
+  .service[data-tone="sand"] .service-icon { background: #f3ead2; color: var(--gold); }
+  .service[data-tone="rose"] .service-icon { background: #f5dfd9; color: var(--rose); }
+  .service[data-tone="teal"] .service-icon { background: var(--teal-soft); color: var(--teal-deep); }
+
+  /* ---------- FLOW ---------- */
+  .flow {
+    display: grid; gap: 0;
+    counter-reset: step;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 36px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line-soft);
+    counter-increment: step;
+  }
+  .step:first-child { border-top: none; }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 48px; font-weight: 400;
+    color: var(--teal);
+    line-height: 1; padding-top: 6px;
+    font-feature-settings: "lnum";
+  }
+  .step-num::before {
+    content: "0" counter(step);
+  }
+  .step:nth-child(n+10) .step-num::before { content: counter(step); }
+  .step-body h3 {
+    font-size: 26px; margin-bottom: 4px;
+  }
+  .step-body .who {
+    font-size: 13px; color: var(--ink-mute); margin-bottom: 14px;
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 11px; border-radius: 999px;
+    background: var(--paper-2); color: var(--ink-soft);
+    font-size: 12px; font-weight: 500; border: 1px solid var(--line);
+  }
+  .pill::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+  }
+  .pill[data-kind="cliente"]::before { background: var(--leaf); }
+  .pill[data-kind="callcenter"]::before { background: var(--teal); }
+  .pill[data-kind="conductor"]::before { background: var(--gold); }
+  .pill[data-kind="parque"]::before { background: var(--rose); }
+  .pill[data-kind="admin"]::before { background: var(--ink); }
+  .pill[data-kind="contador"]::before { background: var(--teal-deep); }
+  .step-body p { font-size: 16px; max-width: 62ch; }
+  @media (max-width: 720px) {
+    .step { grid-template-columns: 1fr; gap: 10px; padding: 28px 0; }
+    .step-num { font-size: 36px; padding-top: 0; }
+  }
+
+  /* ---------- ESTADOS TIMELINE ---------- */
+  .states-intro { margin-bottom: 36px; }
+  .states {
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .state {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    position: relative; overflow: hidden;
+  }
+  .state::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--teal);
+  }
+  .state[data-phase="recepcion"]::before { background: var(--leaf); }
+  .state[data-phase="logistica"]::before { background: var(--gold); }
+  .state[data-phase="parque"]::before { background: var(--rose); }
+  .state[data-phase="entrega"]::before { background: var(--teal); }
+  .state[data-phase="cierre"]::before { background: var(--ink); }
+  .state[data-phase="cancel"]::before { background: #c25e5e; }
+  .state-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 6px;
+  }
+  .state-num {
+    font-family: 'Fraunces', serif; font-size: 14px; color: var(--ink-mute); font-weight: 500;
+  }
+  .state-name { font-weight: 600; color: var(--ink); font-size: 15.5px; }
+  .state-friendly { font-size: 14px; color: var(--ink-soft); margin: 4px 0 8px; font-style: italic; }
+  .state-meta { font-size: 12.5px; color: var(--ink-mute); }
+  .state-meta b { color: var(--ink-soft); font-weight: 600; }
+
+  /* phase header */
+  .phase-banner {
+    grid-column: 1 / -1;
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    background: var(--paper-2);
+    margin-top: 18px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; font-weight: 600; color: var(--ink-soft);
+    letter-spacing: .03em; text-transform: uppercase;
+  }
+  .phase-banner:first-child { margin-top: 0; }
+  .phase-banner .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); }
+  .phase-banner[data-phase="recepcion"] .dot { background: var(--leaf); }
+  .phase-banner[data-phase="logistica"] .dot { background: var(--gold); }
+  .phase-banner[data-phase="parque"] .dot { background: var(--rose); }
+  .phase-banner[data-phase="entrega"] .dot { background: var(--teal); }
+  .phase-banner[data-phase="cierre"] .dot { background: var(--ink); }
+  .phase-banner[data-phase="cancel"] .dot { background: #c25e5e; }
+
+  /* ---------- ROLES ---------- */
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 18px;
+  }
+  .role {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .role-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--line-soft);
+  }
+  .role-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--paper-2); display: grid; place-items: center;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 18px;
+    color: var(--teal-deep);
+  }
+  .role[data-tone="admin-total"] .role-avatar { background: var(--ink); color: #fff; }
+  .role[data-tone="admin-ops"] .role-avatar { background: var(--teal-deep); color: #fff; }
+  .role[data-tone="coordinador"] .role-avatar { background: var(--rose); color: #fff; }
+  .role[data-tone="operario"] .role-avatar { background: #f3ead2; color: var(--gold); }
+  .role[data-tone="conductor"] .role-avatar { background: var(--gold); color: #fff; }
+  .role[data-tone="callcenter"] .role-avatar { background: var(--teal); color: #fff; }
+  .role[data-tone="contador"] .role-avatar { background: #e8f0dd; color: var(--leaf); }
+  .role[data-tone="auditor"] .role-avatar { background: var(--line); color: var(--ink-soft); }
+  .role h3 { font-size: 21px; margin-bottom: 2px; line-height: 1.2; }
+  .role-subtitle { font-size: 13px; color: var(--ink-mute); letter-spacing: .03em; }
+  .role-block { margin-bottom: 16px; }
+  .role-block:last-child { margin-bottom: 0; }
+  .role-block-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--ink-mute); margin-bottom: 6px;
+  }
+  .role-block p { font-size: 14.5px; margin: 0; color: var(--ink-soft); }
+  .role-block ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink-soft); }
+  .role-block ul li { margin-bottom: 3px; }
+  .role-cannot {
+    margin-top: auto; padding-top: 16px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px; color: var(--ink-mute);
+  }
+  .role-cannot b { color: #c25e5e; font-weight: 600; }
+  .role-only {
+    background: var(--teal-soft);
+    border-left: 3px solid var(--teal);
+    padding: 10px 14px; border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 13.5px; color: var(--teal-deep);
+  }
+  .role-only b { color: var(--teal-deep); font-weight: 600; display: block; margin-bottom: 4px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+
+  /* ---------- FUNCIONALIDADES TRANSVERSALES ---------- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+  }
+  .feature {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    position: relative; overflow: hidden;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .feature:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--teal-soft); }
+  .feature::before {
+    content: ""; position: absolute; top: 0; right: 0;
+    width: 110px; height: 110px;
+    background: radial-gradient(circle at 100% 0, var(--teal-soft) 0%, transparent 70%);
+    opacity: .5; pointer-events: none;
+  }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 17px;
+    background: var(--paper-2); color: var(--teal-deep);
+    font-family: 'Fraunces', serif; font-weight: 600;
+    margin-bottom: 18px; position: relative;
+  }
+  .feature h3 { font-size: 22px; margin-bottom: 12px; line-height: 1.25; }
+  .feature-block { margin-bottom: 14px; }
+  .feature-block:last-child { margin-bottom: 0; }
+  .feature-block-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--ink-mute); margin-bottom: 5px;
+  }
+  .feature-block p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+  .feature[data-tone="leaf"] .feature-icon { background: #e8f0dd; color: var(--leaf); }
+  .feature[data-tone="sand"] .feature-icon { background: #f3ead2; color: var(--gold); }
+  .feature[data-tone="rose"] .feature-icon { background: #f5dfd9; color: var(--rose); }
+  .feature[data-tone="ink"] .feature-icon { background: var(--ink); color: #fff; }
+  .feature[data-tone="teal"] .feature-icon { background: var(--teal-soft); color: var(--teal-deep); }
+  .feature-pending {
+    display: inline-block; margin-left: 8px;
+    padding: 2px 8px; border-radius: 999px;
+    background: #fdf0e2; color: #9a6a2a;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  /* Phase divider for features */
+  .phase-divider {
+    margin: 60px 0 28px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .phase-divider:first-of-type { margin-top: 0; }
+  .phase-divider .line { flex: 1; height: 1px; background: var(--line); }
+  .phase-divider .tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 18px; border-radius: 999px;
+    background: var(--teal-soft); color: var(--teal-deep);
+    font-size: 12px; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .phase-divider .tag::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal); box-shadow: 0 0 0 4px rgba(14,139,139,.15);
+  }
+  .phase-divider.future .tag {
+    background: #efeae0; color: #8a7a52;
+  }
+  .phase-divider.future .tag::before { background: #b9a880; box-shadow: 0 0 0 4px rgba(180,138,62,.12); }
+  .phase-divider h3 {
+    font-size: 20px; margin: 0; color: var(--ink); font-weight: 500;
+  }
+
+  /* Future cards — atenuadas */
+  .feature.future {
+    background: #f8f6f0;
+    border: 1px dashed var(--line);
+    box-shadow: none;
+    opacity: .92;
+  }
+  .feature.future:hover {
+    transform: none; box-shadow: var(--shadow-sm);
+    border-style: dashed; border-color: var(--sand);
+  }
+  .feature.future::before { display: none; }
+  .feature.future h3 { color: var(--ink-soft); }
+  .feature.future .feature-icon {
+    background: #ede8db !important; color: #9a8d6a !important;
+  }
+  .feature.future .feature-block p { color: var(--ink-mute); }
+  .feature.future .feature-block-label { color: #b0a48a; }
+  .feature.future::after {
+    content: "Fase 2";
+    position: absolute; top: 22px; right: 22px;
+    padding: 3px 10px; border-radius: 999px;
+    background: #ede8db; color: #7a6d4d;
+    font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
+  }
+
+  /* ---------- ISO ---------- */
+  .iso {
+    background:
+      linear-gradient(180deg, #fff 0%, var(--paper-2) 100%);
+  }
+  .iso-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .promise {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    position: relative;
+  }
+  .promise-num {
+    font-family: 'Fraunces', serif;
+    font-size: 14px; color: var(--teal-deep); font-weight: 600;
+    letter-spacing: .05em; margin-bottom: 12px;
+  }
+  .promise h3 { font-size: 20px; margin-bottom: 10px; line-height: 1.25; }
+  .promise p { font-size: 14.5px; margin: 0; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 60px 0 80px;
+    background: var(--ink);
+    color: #c1cad6;
+  }
+  footer .container { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: end; }
+  footer h4 { color: #fff; font-size: 24px; margin-bottom: 8px; }
+  footer p { color: #8b9aae; font-size: 14px; max-width: 50ch; margin: 0; }
+  footer .meta { font-size: 12.5px; color: #6b7d92; letter-spacing: .04em; }
+  footer .meta b { color: #c1cad6; display: block; margin-bottom: 4px; font-weight: 500; }
+  @media (max-width: 720px) {
+    footer .container { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- UTIL ---------- */
+  .accent { color: var(--teal-deep); }
+  .lead-quote {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; font-style: italic;
+    color: var(--ink); border-left: 3px solid var(--teal); padding: 8px 0 8px 22px;
+    margin: 32px 0;
+    line-height: 1.4;
+  }
+
+  @media print {
+    .topbar, footer { display: none; }
+    section, .hero { padding: 30px 0; page-break-inside: avoid; }
+    .service, .role, .state, .promise { break-inside: avoid; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">T</div>
+      <div>
+        Tierra de Mascotas
+        <small>Plataforma de gestión</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#flujo">Cómo funciona</a>
+      <a href="#estados">Ciclo de la orden</a>
+      <a href="#roles">Roles</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#iso">ISO 9001</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="border-top:none;">
+  <div class="container">
+    <span class="hero-eyebrow">Documento para gerencia · v1.0</span>
+    <h1>Cómo funciona<br/>la plataforma, <em>de principio a fin</em>.</h1>
+    <p class="hero-lede">
+      Una guía pensada para quien dirige la operación. Sin lenguaje técnico:
+      qué hace cada persona, cómo se cuida a cada familia, y de qué manera
+      el sistema deja huella de todo lo que ocurre para cumplir con ISO 9001.
+    </p>
+    <div class="hero-meta">
+      <div>
+        <b>4 servicios</b>
+        <span>Cremación, compostaje, sepultura</span>
+      </div>
+      <div>
+        <b>15 momentos en cada orden</b>
+        <span>Desde la solicitud hasta el cierre</span>
+      </div>
+      <div>
+        <b>8 roles</b>
+        <span>Cada uno con responsabilidades claras</span>
+      </div>
+      <div>
+        <b>Reportes ejecutivos en vivo</b>
+        <span>Indicadores día, mes y año en tiempo real</span>
+      </div>
+      <div>
+        <b>100% trazable</b>
+        <span>Auditoría inmutable, ISO 9001</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Servicios que ofrece la operación</span>
+      <h2>Cuatro maneras de despedir, una sola promesa.</h2>
+      <p>
+        Cada familia elige cómo quiere despedir a su mascota. La plataforma
+        adapta el flujo de trabajo, los precios y la documentación según el
+        servicio elegido, sin perder de vista la dignidad del proceso.
+      </p>
+    </div>
+
+    <div class="services">
+      <article class="service" data-tone="teal">
+        <div class="service-icon">CI</div>
+        <h3>Cremación individual</h3>
+        <p>La mascota se crema sola en el horno. Las cenizas vuelven a la familia en una urna personalizada. El servicio más solicitado.</p>
+      </article>
+
+      <article class="service" data-tone="leaf">
+        <div class="service-icon">CO</div>
+        <h3>Compostaje individual</h3>
+        <p>Alternativa ecológica: la mascota se transforma en sustrato fértil. La familia recibe el producto compostado, símbolo de retorno a la tierra.</p>
+      </article>
+
+      <article class="service" data-tone="sand">
+        <div class="service-icon">SE</div>
+        <h3>Sepultura</h3>
+        <p>Un espacio propio en el Parque Memorial. La familia puede visitar, renovar el espacio cada dos años o autorizar la exhumación más adelante.</p>
+      </article>
+
+      <article class="service" data-tone="rose">
+        <div class="service-icon">CC</div>
+        <h3>Cremación colectiva</h3>
+        <p>Varias mascotas se creman juntas. La opción más accesible económicamente. No se devuelven cenizas individuales.</p>
+      </article>
+    </div>
+
+    <div class="lead-quote">
+      Los precios se "fotografían" en el momento de crear la orden.
+      Si mañana el precio cambia, las órdenes antiguas mantienen el suyo.
+      Nada se altera por debajo: queda evidencia para auditoría.
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLUJO ============ -->
+<section id="flujo" style="background: var(--paper-2);">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Recorrido end-to-end</span>
+      <h2>Lo que vive una familia,<br/>paso a paso.</h2>
+      <p>
+        Desde el primer clic en la web hasta el cierre contable del mes. Cada
+        etapa muestra qué ocurre, quién participa y qué parte del sistema se
+        usa. Pensado para entender el negocio, no la tecnología.
+      </p>
+    </div>
+
+    <div class="flow">
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>La familia descubre el servicio</h3>
+          <div class="who">
+            <span class="pill" data-kind="cliente">Cliente</span>
+            <span>· en la web pública, sin registrarse</span>
+          </div>
+          <p>Una familia llega al sitio en un momento difícil. Completa un formulario sencillo paso a paso: sus datos, los de la mascota, el peso, el tipo de servicio y productos adicionales como placas o materas. El sistema calcula el precio automáticamente y le entrega un <strong>número de ticket</strong> con el que podrá consultar el avance en cualquier momento.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>El call center valida y acompaña</h3>
+          <div class="who">
+            <span class="pill" data-kind="callcenter">Call center</span>
+            <span>· conversa con la familia</span>
+          </div>
+          <p>La solicitud entra a una bandeja del call center. Un asesor revisa los datos, confirma el servicio por <strong>chat anclado a la orden</strong> y resuelve dudas. La familia recibe una notificación de confirmación. Si ya conocemos a esa familia (compraron antes), aparecen sus datos para no preguntar dos veces.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Se asigna un conductor</h3>
+          <div class="who">
+            <span class="pill" data-kind="callcenter">Call center</span>
+            <span>· decide qué conductor recoge</span>
+          </div>
+          <p>El call center elige un conductor disponible según zona y turno. El conductor recibe en su <strong>app móvil</strong> la dirección, los datos de contacto y el horario. La familia ve quién va en camino y aproximadamente cuándo llegará.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Recolección en el domicilio</h3>
+          <div class="who">
+            <span class="pill" data-kind="conductor">Conductor</span>
+            <span>· en la casa de la familia</span>
+          </div>
+          <p>El conductor llega a la casa, recibe a la mascota con dignidad y confirma en su app el momento exacto de la recolección. Si surge una novedad (la familia no está, hay tráfico, hubo un imprevisto), la reporta desde la misma pantalla. La familia recibe aviso en cada hito.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Entrega en el Parque Memorial</h3>
+          <div class="who">
+            <span class="pill" data-kind="conductor">Conductor</span>
+            <span>·</span>
+            <span class="pill" data-kind="parque">Parque</span>
+          </div>
+          <p>El conductor llega al parque con las mascotas del día. El <strong>coordinador del parque</strong> verifica que coincidan con lo programado y registra la recepción. Cada mascota queda asignada a su cola de procesamiento según el servicio que la familia eligió.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Procesamiento según el servicio</h3>
+          <div class="who">
+            <span class="pill" data-kind="parque">Operarios del parque</span>
+            <span>· con checklist guiado</span>
+          </div>
+          <p>Aquí el flujo se divide:</p>
+          <ul style="color:var(--ink-soft); font-size:15.5px; padding-left:20px; margin-top:0;">
+            <li><strong>Cremación o compostaje individual:</strong> el operario sigue una lista de pasos en su tablet, marca avance, y al finalizar el resultado queda registrado: cenizas listas o producto compostado listo.</li>
+            <li><strong>Cremación colectiva:</strong> la mascota entra al horno compartido y el ciclo cierra ahí mismo, sin devolución de cenizas.</li>
+            <li><strong>Sepultura:</strong> queda programada en el cronograma del parque y se ejecuta en su día. Se crea un registro que acompañará al espacio durante dos años.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Preparación de la entrega</h3>
+          <div class="who">
+            <span class="pill" data-kind="parque">Coordinador del parque</span>
+            <span>· deja todo listo</span>
+          </div>
+          <p>Cuando las cenizas están terminadas y la urna preparada con la documentación, el coordinador marca la orden como "lista para entrega". <strong>La familia recibe la notificación</strong>: "Sus cenizas ya están listas, mañana se las llevamos" o "ya puede pasar a recogerlas".</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Entrega de cenizas a la familia</h3>
+          <div class="who">
+            <span class="pill" data-kind="conductor">Conductor</span>
+            <span>· cierra el ciclo emocional</span>
+          </div>
+          <p>Un conductor lleva la urna al domicilio (o la familia pasa por el parque). En el momento de la entrega, registra el cierre en su app. Para la familia este es el momento más importante: el sistema se asegura de que la promesa se cumpla, no antes ni después de lo prometido.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Cobro y conciliación</h3>
+          <div class="who">
+            <span class="pill" data-kind="admin">Admin operaciones</span>
+            <span>·</span>
+            <span class="pill" data-kind="contador">Contador</span>
+          </div>
+          <p>El pago puede haber llegado de tres maneras: pasarela en línea cuando la familia hizo el pedido, efectivo recibido por el conductor, o convenio (por ejemplo una funeraria asociada que paga después). El sistema reconcilia cada forma y, cuando todo cuadra, <strong>"sella" la orden</strong> para facturación. El contador externo emite la factura electrónica desde su propia bandeja.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>Cierre y memoria del caso</h3>
+          <div class="who">
+            <span class="pill" data-kind="admin">Sistema</span>
+            <span>· auditoría inmutable</span>
+          </div>
+          <p>La orden queda archivada con todo su recorrido: quién hizo qué, cuándo, con qué precios, qué documentos se entregaron y en qué versión. Aunque pasen los años, la familia podrá consultar su caso con el ticket original. La gerencia y el auditor pueden reconstruir la historia completa en segundos.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTADOS ============ -->
+<section id="estados">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Ciclo de vida de la orden</span>
+      <h2>Los 15 momentos que vive cada caso.</h2>
+      <p class="states-intro">
+        Cada orden atraviesa una secuencia de estados. Esta es la "huella digital"
+        que el sistema deja para que cualquier persona — gerencia, asesor, auditor —
+        sepa exactamente en qué punto está cada familia. Los colores agrupan las grandes etapas.
+      </p>
+    </div>
+
+    <div class="states">
+
+      <div class="phase-banner" data-phase="recepcion"><span class="dot"></span> Recepción y aceptación</div>
+
+      <article class="state" data-phase="recepcion">
+        <div class="state-head"><span class="state-num">01</span></div>
+        <div class="state-name">Recibida</div>
+        <div class="state-friendly">"Tenemos tu solicitud, estamos sobre ella."</div>
+        <div class="state-meta"><b>Dispara:</b> la familia, al enviar el formulario web.</div>
+      </article>
+
+      <article class="state" data-phase="recepcion">
+        <div class="state-head"><span class="state-num">02</span></div>
+        <div class="state-name">Aceptada</div>
+        <div class="state-friendly">"Validamos los datos, nos hacemos cargo."</div>
+        <div class="state-meta"><b>Dispara:</b> el call center, al confirmar la orden.</div>
+      </article>
+
+      <div class="phase-banner" data-phase="logistica"><span class="dot"></span> Logística de recolección</div>
+
+      <article class="state" data-phase="logistica">
+        <div class="state-head"><span class="state-num">03</span></div>
+        <div class="state-name">Asignada a conductor</div>
+        <div class="state-friendly">"Asignamos al conductor que irá a tu casa."</div>
+        <div class="state-meta"><b>Dispara:</b> call center / admin operaciones.</div>
+      </article>
+
+      <article class="state" data-phase="logistica">
+        <div class="state-head"><span class="state-num">04</span></div>
+        <div class="state-name">En recolección</div>
+        <div class="state-friendly">"Nuestro conductor está en camino."</div>
+        <div class="state-meta"><b>Dispara:</b> el conductor, al iniciar la ruta.</div>
+      </article>
+
+      <article class="state" data-phase="logistica">
+        <div class="state-head"><span class="state-num">05</span></div>
+        <div class="state-name">Recolección confirmada</div>
+        <div class="state-friendly">"Recibimos a tu mascota con todo el cuidado."</div>
+        <div class="state-meta"><b>Dispara:</b> el conductor, en el domicilio.</div>
+      </article>
+
+      <article class="state" data-phase="logistica">
+        <div class="state-head"><span class="state-num">06</span></div>
+        <div class="state-name">Entregada al parque</div>
+        <div class="state-friendly">"Llegamos al Parque Memorial."</div>
+        <div class="state-meta"><b>Dispara:</b> el conductor, al llegar al parque.</div>
+      </article>
+
+      <div class="phase-banner" data-phase="parque"><span class="dot"></span> Operación en el parque</div>
+
+      <article class="state" data-phase="parque">
+        <div class="state-head"><span class="state-num">07</span></div>
+        <div class="state-name">En cola</div>
+        <div class="state-friendly">"Está en la programación de hoy."</div>
+        <div class="state-meta"><b>Dispara:</b> el coordinador del parque.</div>
+      </article>
+
+      <article class="state" data-phase="parque">
+        <div class="state-head"><span class="state-num">08</span></div>
+        <div class="state-name">En procesamiento</div>
+        <div class="state-friendly">"Estamos en el proceso de cremación o compostaje."</div>
+        <div class="state-meta"><b>Dispara:</b> los operarios, al iniciar el ciclo.</div>
+      </article>
+
+      <article class="state" data-phase="parque">
+        <div class="state-head"><span class="state-num">09</span></div>
+        <div class="state-name">Cenizas / producto listo</div>
+        <div class="state-friendly">"El proceso terminó, cenizas o producto listos."</div>
+        <div class="state-meta"><b>Dispara:</b> los operarios, al finalizar.</div>
+      </article>
+
+      <article class="state" data-phase="parque">
+        <div class="state-head"><span class="state-num">10</span></div>
+        <div class="state-name">Sepultura programada</div>
+        <div class="state-friendly">"Tu mascota será sepultada el día acordado."</div>
+        <div class="state-meta"><b>Dispara:</b> el coordinador del parque.</div>
+      </article>
+
+      <article class="state" data-phase="parque">
+        <div class="state-head"><span class="state-num">11</span></div>
+        <div class="state-name">Sepultura realizada</div>
+        <div class="state-friendly">"Tu mascota descansa en el Parque Memorial."</div>
+        <div class="state-meta"><b>Dispara:</b> operarios / coordinador.</div>
+      </article>
+
+      <div class="phase-banner" data-phase="entrega"><span class="dot"></span> Entrega a la familia</div>
+
+      <article class="state" data-phase="entrega">
+        <div class="state-head"><span class="state-num">12</span></div>
+        <div class="state-name">Lista para entrega</div>
+        <div class="state-friendly">"Tus cenizas ya están listas para volver a casa."</div>
+        <div class="state-meta"><b>Dispara:</b> el coordinador del parque.</div>
+      </article>
+
+      <article class="state" data-phase="entrega">
+        <div class="state-head"><span class="state-num">13</span></div>
+        <div class="state-name">Entrega en camino</div>
+        <div class="state-friendly">"Nuestro conductor lleva la urna a tu casa."</div>
+        <div class="state-meta"><b>Dispara:</b> el conductor, al iniciar la ruta de entrega.</div>
+      </article>
+
+      <div class="phase-banner" data-phase="cierre"><span class="dot"></span> Cierre y excepciones</div>
+
+      <article class="state" data-phase="cierre">
+        <div class="state-head"><span class="state-num">14</span></div>
+        <div class="state-name">Completada</div>
+        <div class="state-friendly">"El servicio terminó y queda en histórico."</div>
+        <div class="state-meta"><b>Dispara:</b> el sistema, cuando entrega y pago están confirmados.</div>
+      </article>
+
+      <article class="state" data-phase="cancel">
+        <div class="state-head"><span class="state-num">15</span></div>
+        <div class="state-name">Cancelada</div>
+        <div class="state-friendly">"La orden fue cancelada y queda registrada."</div>
+        <div class="state-meta"><b>Dispara:</b> familia, call center o admin (con motivo).</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROLES ============ -->
+<section id="roles" style="background: var(--paper-2);">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Funciones por rol</span>
+      <h2>Quién hace qué, cada día.</h2>
+      <p>
+        Cada persona en la operación ve solo lo que necesita ver y puede hacer
+        solo lo que su rol permite. Esto protege la operación, simplifica el
+        trabajo diario y da claridad a la auditoría.
+      </p>
+    </div>
+
+    <div class="roles">
+
+      <article class="role" data-tone="admin-total">
+        <div class="role-head">
+          <div class="role-avatar">AG</div>
+          <div>
+            <h3>Administrador general</h3>
+            <div class="role-subtitle">Dirección · acceso completo</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Crea y edita usuarios, asigna roles, da de alta o de baja accesos.</li>
+            <li>Actualiza precios de los servicios (cremación, compostaje, sepultura). Los cambios solo aplican a órdenes nuevas.</li>
+            <li>Configura los convenios con aseguradoras/funerarias (Prever, Conferics, etc.): descuento, autorización, modalidad de cobro.</li>
+            <li>Aprueba excepciones solicitadas por el call center: obsequios, descuentos no estándar, cancelaciones complejas.</li>
+            <li>Aprueba el lote quincenal de comisiones a veterinarios antes de pagarse.</li>
+            <li>Decide sobre sepulturas sin contacto (familias ilocalizables): exhumar, compostar, reubicar.</li>
+            <li>Revisa indicadores ejecutivos del mes y firma el paquete de cierre que va al contador.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Cambiar precios, aprobar convenios, aprobar lotes de comisiones, decidir sobre sepulturas sin contacto.
+        </div>
+        <div class="role-cannot"><b>No reemplaza</b> al operario (no procesa cenizas) ni al contador (no emite factura). No crea órdenes — eso es del call center.</div>
+      </article>
+
+      <article class="role" data-tone="admin-ops">
+        <div class="role-head">
+          <div class="role-avatar">AO</div>
+          <div>
+            <h3>Administrador de operaciones</h3>
+            <div class="role-subtitle">Coordinación día a día</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Valida soportes de caja menor (foto del recibo, motivo, autorizador). Devuelve los que están incompletos.</li>
+            <li>Concilia el efectivo del día con lo que reportan los conductores. Cuadra diferencias.</li>
+            <li>"Sella" las órdenes en convenio post-pago para que el contador pueda facturarlas.</li>
+            <li>Distribuye comisiones a veterinarios por sectores; valida la evidencia fotográfica con marca de agua (vet, fecha, GPS).</li>
+            <li>Reasigna conductores cuando hay imprevistos (enfermedad, sobrecarga de zona).</li>
+            <li>Recibe novedades del parque (mascotas fuera de programación, equipos rotos) y coordina la solución.</li>
+            <li>Marca cupones de convenios como reportados al portal del aliado.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Sellar órdenes para facturación, validar caja menor, ejecutar el pago de comisiones por sector.
+        </div>
+        <div class="role-cannot"><b>No puede</b> cambiar precios, aprobar convenios nuevos ni ver el estado bancario del contador.</div>
+      </article>
+
+      <article class="role" data-tone="coordinador">
+        <div class="role-head">
+          <div class="role-avatar">CP</div>
+          <div>
+            <h3>Coordinador del parque</h3>
+            <div class="role-subtitle">Supervisión del Parque Memorial</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Planifica la semana combinando actividades fijas (cremaciones, podas) y variables (sepulturas, exhumaciones puntuales).</li>
+            <li>Verifica que las mascotas que llegan coincidan con la programación. Registra discrepancias.</li>
+            <li>Cierra el día consolidando los tres turnos: qué se hizo, qué quedó pendiente y por qué motivo.</li>
+            <li>Reprograma al día siguiente las actividades no completadas (lluvia, equipo, falta de insumo).</li>
+            <li>Añade productos a una orden cuando la familia decide algo extra en el parque (placa, matera).</li>
+            <li>Programa exhumaciones y valida que exista el resguardo fotográfico previo obligatorio.</li>
+            <li>Envía a las 15:30 el reporte automático de novedades del día a la dirección.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Aceptar/rechazar la programación del día, reprogramar actividades no realizadas, autorizar el inicio de una exhumación.
+        </div>
+        <div class="role-cannot"><b>No puede</b> modificar órdenes antes de su llegada al parque, ni acceder a caja menor o reportes financieros.</div>
+      </article>
+
+      <article class="role" data-tone="operario">
+        <div class="role-head">
+          <div class="role-avatar">OP</div>
+          <div>
+            <h3>Operario logístico</h3>
+            <div class="role-subtitle">Ejecuta las tareas del parque</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Al iniciar turno, abre su checklist personal: solo ve lo que le toca a él.</li>
+            <li>Alista el horno, ejecuta cremaciones individuales o colectivas, prepara compostajes.</li>
+            <li>Toma foto/video de las mascotas recibidas para conciliar con la programación.</li>
+            <li>Antes de una exhumación, confirma que existe la evidencia fotográfica/video previa.</li>
+            <li>Marca cada actividad como "completada" o "no realizado" con motivo (lluvia, daño de equipo).</li>
+            <li>Informa al coordinador si encuentra algo fuera de lo esperado.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Reportar avance físico del proceso (encender horno, cerrar ciclo de cremación, terminar compostaje).
+        </div>
+        <div class="role-cannot"><b>No accede</b> a datos del cliente, precios, otras tareas o información financiera. Su pantalla está pensada para una sola mano y guantes.</div>
+      </article>
+
+      <article class="role" data-tone="conductor">
+        <div class="role-head">
+          <div class="role-avatar">CN</div>
+          <div>
+            <h3>Conductor</h3>
+            <div class="role-subtitle">Transporte y entrega</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Abre la app y ve su lista de recogidas ordenada por proximidad y hora, con datos de contacto del cliente.</li>
+            <li>En el domicilio, pulsa "Recogida OK" y la orden avanza automáticamente.</li>
+            <li>Al llegar al parque, entrega varias mascotas a la vez con un solo botón.</li>
+            <li>Reporta novedades tipificadas (cliente no estaba, tráfico denso, dirección errada) con una nota.</li>
+            <li>Durante la tarde ve la lista de entregas de cenizas a domicilio y las marca al entregarlas.</li>
+            <li>Recibe pagos en efectivo cuando aplique; los reporta para conciliar con admin operaciones.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Confirmar la recolección en el domicilio y la entrega física de cenizas a la familia.
+        </div>
+        <div class="role-cannot"><b>No puede</b> auto-asignarse recogidas, ver la ruta de otros conductores, ni acceder al dashboard, inventario o datos contables.</div>
+      </article>
+
+      <article class="role" data-tone="callcenter">
+        <div class="role-head">
+          <div class="role-avatar">CC</div>
+          <div>
+            <h3>Call center / Comercial</h3>
+            <div class="role-subtitle">Atención a la familia</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Trabaja desde la bandeja de solicitudes nuevas, ordenada por antigüedad y prioridad.</li>
+            <li>Conversa con la familia por el chat de la orden: aclara dudas, recibe comprobantes de pago, redacta mensajes personalizados.</li>
+            <li>Asigna conductor considerando carga del turno y zona.</li>
+            <li>Modifica los productos de una orden en curso (agrega placa, cambia urna) si la familia lo pide.</li>
+            <li>Negocia descuentos no estándar u obsequios por demora y crea la solicitud de aprobación al administrador.</li>
+            <li>Asocia órdenes a un convenio (Prever, Conferics) cuando aplica.</li>
+            <li>Al cerrar turno deja notas al siguiente agente: "falta comprobante", "esperando respuesta de la familia".</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Crear órdenes desde el call center, asignar conductor, asociar convenio y abrir el chat con la familia.
+        </div>
+        <div class="role-cannot"><b>No puede</b> aprobar excepciones (solo solicitarlas), sellar órdenes para factura, ni ver la operación del parque.</div>
+      </article>
+
+      <article class="role" data-tone="contador">
+        <div class="role-head">
+          <div class="role-avatar">CT</div>
+          <div>
+            <h3>Contador externo</h3>
+            <div class="role-subtitle">Facturación y cierre contable</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Revisa la bandeja de órdenes "selladas" listas para facturar.</li>
+            <li>Concilia los pagos electrónicos (tarjeta, transferencia) contra el extracto del banco.</li>
+            <li>Marca cada pago como confirmado para liberar la facturación electrónica.</li>
+            <li>Genera el paquete mensual de cierre: ingresos, soportes, comprobantes.</li>
+            <li>Genera el detalle de facturación por convenio para cada aseguradora.</li>
+            <li>Exporta reportes a PDF y Excel para sus propios procesos contables.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol puede</b>
+          Confirmar que un pago electrónico ingresó al banco y emitir el cierre contable mensual.
+        </div>
+        <div class="role-cannot"><b>No accede</b> a caja menor, inventario operativo, ni modifica órdenes. Solo ve la información mínima necesaria para facturar.</div>
+      </article>
+
+      <article class="role" data-tone="auditor">
+        <div class="role-head">
+          <div class="role-avatar">AU</div>
+          <div>
+            <h3>Auditor (solo lectura)</h3>
+            <div class="role-subtitle">Conformidad ISO 9001</div>
+          </div>
+        </div>
+        <div class="role-block">
+          <div class="role-block-label">Lo que hace cada día</div>
+          <ul>
+            <li>Reconstruye el recorrido completo de cualquier orden: quién la creó, qué cambios sufrió, quién aprobó qué.</li>
+            <li>Filtra el rastro por usuario: "todo lo que hizo Juan entre dos fechas".</li>
+            <li>Consulta el histórico de cambios de precio (qué valía un servicio el día Y).</li>
+            <li>Descarga la evidencia documental para auditorías ISO internas y externas.</li>
+            <li>Verifica que las versiones de plantillas y procedimientos estén vigentes.</li>
+            <li>Consulta el registro de backups y su integridad.</li>
+          </ul>
+        </div>
+        <div class="role-only">
+          <b>Solo este rol</b>
+          ve el sistema completo en modo lectura sin posibilidad de alterar ningún dato — su huella queda registrada de todas formas.
+        </div>
+        <div class="role-cannot"><b>No puede modificar absolutamente nada.</b> Tampoco acceder a contraseñas o credenciales — el sistema no las expone a nadie.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUNCIONALIDADES TRANSVERSALES ============ -->
+<section id="funcionalidades">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Capacidades adicionales · alcance por fases</span>
+      <h2>Lo que entra en la Fase 1<br/>y lo que viene después.</h2>
+      <p>
+        Además del flujo completo de la orden, el sistema cuenta con
+        reportes ejecutivos en vivo desde el primer día. El resto de
+        capacidades (caja menor, inventario, sepulturas en el tiempo,
+        comunicaciones, PQRs, recordatorios, convenios y comisiones a
+        veterinarios) están planificadas para fases siguientes.
+      </p>
+    </div>
+
+    <!-- FASE 1 -->
+    <div class="phase-divider">
+      <div class="tag">Fase 1 · Disponible</div>
+      <h3>Reportes y visibilidad ejecutiva</h3>
+      <div class="line"></div>
+    </div>
+
+    <div class="features">
+
+      <article class="feature" data-tone="sand">
+        <div class="feature-icon">RE</div>
+        <h3>Reportes y dashboard ejecutivo</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hace</div>
+          <p>Dashboard con métricas día, mes y año: órdenes recibidas, en curso, completadas, canceladas, ingresos confirmados, actividades cumplidas frente a programadas. Acompañado de reportes externos: compostaje al CBC, paquete mensual al contador, anuales a sanidad.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Decisiones basadas en datos desde el primer día. Reportes regulatorios semiautomáticos reducen carga administrativa. KPIs alineados a objetivos estratégicos (por afinar con la dirección).</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase-divider future">
+      <div class="tag">Fase 2 · Próximas versiones</div>
+      <h3>Capacidades planificadas para siguientes entregas</h3>
+      <div class="line"></div>
+    </div>
+
+    <div class="features">
+
+      <article class="feature future" data-tone="teal">
+        <div class="feature-icon">$</div>
+        <h3>Caja menor digital</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>El equipo del parque o del call center cargará gastos pequeños (taxi, escoba, almuerzo, domicilio) desde el celular, con foto del recibo. Admin operaciones validará y rechazará soportes incompletos.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Cero recibos perdidos. Auditabilidad inmediata, control de gasto descentralizado y un paquete consolidado para el contador al cierre del mes.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="ink">
+        <div class="feature-icon">CV</div>
+        <h3>Convenios con aseguradoras y funerarias</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Configuración de cada aliado (Prever, Conferics, Global, etc.) con su porcentaje de descuento, autorización previa, cupones y modalidad de cobro. Cada orden bajo convenio quedará "fotografiada" con esas reglas.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Habilitará nuevos canales de venta. Post-pago para mejorar la caja. Reporte mensual automático para conciliar con cada aliado sin armar Excels.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="leaf">
+        <div class="feature-icon">CM</div>
+        <h3>Comisiones a veterinarios</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Cada orden referida por un veterinario calculará su comisión con la regla vigente. Cada quincena, lote por sector con cuánto recibe cada vet. La persona que entrega registrará foto del recibo con marca de agua de fecha y ubicación.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Convertirá la relación con vets en un canal estable de referidos. Evidencia probatoria de cada pago. Rutas optimizadas por sector reducirán tiempo en calle.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="sand">
+        <div class="feature-icon">IN</div>
+        <h3>Inventario de productos e insumos</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Dos inventarios separados: productos que se venden (urnas, placas, materas) e insumos operativos (guantes, papel, vasos). Stock que baja automáticamente al añadir un producto. Alertas amarillas (&lt;5) y rojas (&lt;3) antes del quiebre.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Evita prometerle a una familia una urna que no hay en bodega. Alertas tempranas dan margen para reponer. Seguimiento de pedidos al proveedor concilia con su factura.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="rose">
+        <div class="feature-icon">SP</div>
+        <h3>Sepulturas en el tiempo</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Cada sepultura se renovará cada 2 años. Aviso a la familia 6 meses, 3 meses, 1 mes y al vencimiento. Si no responde, la sepultura pasa a la bandeja "sin contacto" para decisión de dirección. Exhumaciones con foto/video previos obligatorios.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Ingreso recurrente por renovaciones. Menos seguimiento manual. Resguardo fotográfico protege ante reclamos. Identifica deuda acumulada en familias ilocalizables.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="teal">
+        <div class="feature-icon">CH</div>
+        <h3>Comunicaciones con la familia</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Todo dentro de la plataforma, sin WhatsApp personal. La familia consulta con el ticket (sin login), ve línea de tiempo y conversa por el chat anclado a la orden. Correos en hitos críticos. Plantillas versionadas.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Saca el WhatsApp personal del agente: más seguridad y compliance. Reduce llamadas al call center. El chat queda guardado y resuelve disputas sobre acuerdos pasados.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="ink">
+        <div class="feature-icon">PQ</div>
+        <h3>PQRs (peticiones, quejas, reclamos)</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>Bandeja de gestión de salidas no conformes vinculada a la orden afectada. Cada PQR con su acción correctiva, accesible para auditoría ISO. El detalle de pantalla queda por cerrar con la dirección.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Trazabilidad legal de reclamos. Identifica patrones (muchas quejas por urnas equivocadas → revisar parque). Requisito directo de ISO 9001.</p>
+        </div>
+      </article>
+
+      <article class="feature future" data-tone="rose">
+        <div class="feature-icon">RC</div>
+        <h3>Recordatorios y alertas programadas</h3>
+        <div class="feature-block">
+          <div class="feature-block-label">Qué hará</div>
+          <p>El sistema avisará con anticipación los compromisos críticos: nómina, reporte CBC, vencimientos de seguros, expiración de sepulturas. Severidades graduales: notificación → alerta → bloqueo de pantalla si el compromiso vence y nadie actuó.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-block-label">Por qué importa</div>
+          <p>Evita sanciones regulatorias por reportes vencidos. Previene stock-outs. El nivel "bloqueo" garantiza que un compromiso crítico no se ignore.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ISO ============ -->
+<section id="iso" class="iso">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Promesa de calidad ISO 9001</span>
+      <h2>Trazabilidad que se sostiene<br/>delante de una auditoría.</h2>
+      <p>
+        El sistema no solo opera: deja huella permanente de cada decisión.
+        Esto es lo que hace que la certificación ISO 9001 sea sostenible
+        en el tiempo, y no un esfuerzo puntual.
+      </p>
+    </div>
+
+    <div class="iso-grid">
+      <article class="promise">
+        <div class="promise-num">PROMESA 01</div>
+        <h3>Auditoría doble inmutable</h3>
+        <p>Cada cambio — quién, cuándo, desde dónde, qué cambió — queda registrado para siempre. Se puede ver "todo lo que hizo Juan hoy" o "todo lo que pasó con el caso de Firulais", en cualquier momento.</p>
+      </article>
+
+      <article class="promise">
+        <div class="promise-num">PROMESA 02</div>
+        <h3>Documentos codificados y versionados</h3>
+        <p>Cada plantilla (notificaciones, recibos, instructivos) tiene su código ISO y versión. Si algo cambia, la versión anterior queda en histórico. Si una familia reclama bajo qué instructivo se procesó su mascota, lo entregamos.</p>
+      </article>
+
+      <article class="promise">
+        <div class="promise-num">PROMESA 03</div>
+        <h3>Precios congelados por orden</h3>
+        <p>El precio de un servicio se fotografía al momento de crear la orden. Cambios futuros a las tarifas no alteran órdenes pasadas. Los reportes históricos son inmunes a manipulación de precios.</p>
+      </article>
+
+      <article class="promise">
+        <div class="promise-num">PROMESA 04</div>
+        <h3>Backups rotados y documentados</h3>
+        <p>Backups diarios al cierre, conservando siempre el domingo de cada semana y el último de cada mes. Procedimiento documentado, auditable. Frente a una falla, sabemos exactamente cuándo se hizo el último respaldo.</p>
+      </article>
+
+      <article class="promise">
+        <div class="promise-num">PROMESA 05</div>
+        <h3>Gestión de cambios trazable</h3>
+        <p>Cada excepción (descuento, obsequio, cancelación) sigue la ruta solicitud → aprobación → aplicación, con todos los pasos en auditoría. Las PQR de clientes quedan vinculadas a la orden con toda su evidencia.</p>
+      </article>
+
+      <article class="promise">
+        <div class="promise-num">PROMESA 06</div>
+        <h3>Cada rol ve solo lo suyo</h3>
+        <p>Mínimo privilegio: el conductor no ve precios, el operario no ve datos del cliente, el contador no ve la operación del parque. Esto reduce riesgo, simplifica auditoría y protege la información de las familias.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div>
+      <h4>Una plataforma pensada para honrar a quienes amaron.</h4>
+      <p>Este documento describe el funcionamiento general de la plataforma a nivel de negocio. Los detalles técnicos, la configuración de precios por banda de peso y los convenios específicos se definen durante el setup operativo.</p>
+    </div>
+    <div class="meta">
+      <b>Tierra de Mascotas</b>
+      Documento de operación · v1.0<br/>
+      Cali, Colombia
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
